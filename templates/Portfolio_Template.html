@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafaf8;
+      --ink: #111110;
+      --mid: #6b6b63;
+      --accent: #2a5caa;
+      --border: #e4e4dc;
+      --card-bg: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 6vw;
+      background: rgba(250,250,248,0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.01em;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── SECTIONS ── */
+    section { padding: 7rem 6vw; }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    h2.section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.15;
+      max-width: 600px;
+      margin-bottom: 3.5rem;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding-top: 10rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+    }
+    h1.hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      font-weight: 400;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      max-width: 900px;
+      opacity: 0; animation: fadeUp 0.9s 0.35s forwards;
+    }
+    h1.hero-name em { font-style: italic; color: var(--mid); }
+
+    .hero-bio {
+      margin-top: 2.5rem;
+      max-width: 540px;
+      font-size: 1.05rem;
+      color: var(--mid);
+      opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
+    }
+
+    /* Skills bar */
+    .skills-row {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      margin-top: 3rem; padding-bottom: 5rem;
+      opacity: 0; animation: fadeUp 0.9s 0.65s forwards;
+    }
+    .skill-tag {
+      padding: 0.45rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      background: var(--card-bg);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .skill-tag:hover { border-color: var(--accent); background: #f0f4fb; }
+
+    /* ── PROJECT CARDS ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5px;
+      border: 1.5px solid var(--border);
+    }
+    .card {
+      background: var(--card-bg);
+      padding: 2.4rem 2rem;
+      border: 1.5px solid var(--border);
+      margin: -1.5px;
+      transition: background 0.2s;
+      cursor: default;
+    }
+    .card:hover { background: #f4f4f0; }
+    .card-cat {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+    .card p {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+    .card-tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-top: 1.4rem;
+    }
+    .card-tag {
+      font-size: 0.72rem;
+      padding: 0.25rem 0.7rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--mid);
+    }
+
+    /* Section dividers */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── CONTACT ── */
+    #contact { border-top: 1px solid var(--border); }
+    .contact-inner {
+      max-width: 560px;
+    }
+    .contact-inner p {
+      font-size: 1.05rem;
+      color: var(--mid);
+      margin-bottom: 2.5rem;
+    }
+    .contact-link {
+      display: inline-block;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 6vw;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.78rem;
+      color: var(--mid);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 1.2rem 5vw; }
+      .nav-links { gap: 1.5rem; }
+      section { padding: 5rem 5vw; }
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-name">Your Name</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#academic">Academic</a></li>
+    <li><a href="#cad">Design</a></li>
+    <li><a href="#interdisciplinary">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-eyebrow">Mechanical &amp; Interdisciplinary Engineer</p>
+  <h1 class="hero-name">Your Name<br><em>Engineer &amp; Builder.</em></h1>
+  <p class="hero-bio">
+    I design, simulate, and build systems that sit at the intersection of
+    mechanical engineering, electronics, and software — from CAD models to
+    fully integrated prototypes.
+  </p>
+  <div class="skills-row">
+    <span class="skill-tag">SolidWorks</span>
+    <span class="skill-tag">Ansys FEA</span>
+    <span class="skill-tag">Control Systems</span>
+    <span class="skill-tag">Robotics</span>
+    <span class="skill-tag">Arduino / Embedded</span>
+    <span class="skill-tag">Python</span>
+    <span class="skill-tag">MATLAB</span>
+    <span class="skill-tag">Prototyping</span>
+    <span class="skill-tag">PCB Design</span>
+    <span class="skill-tag">3D Printing</span>
+  </div>
+</section>
+
+<!-- ACADEMIC PROJECTS -->
+<section id="academic">
+  <p class="section-label">01 — Academic</p>
+  <h2 class="section-title">Academic Projects</h2>
+
+  <div class="cards-grid">
+
+    <div class="card">
+      <p class="card-cat">Robotics</p>
+      <h3>Robotics Class Project</h3>
+      <p>Brief description of what you built or solved. Mention the goal, your role, and what made it interesting.</p>
+      <div class="card-tags">
+        <span class="card-tag">ROS</span>
+        <span class="card-tag">Sensors</span>
+        <span class="card-tag">Kinematics</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="card-cat">Mini Capstone</p>
+      <h3>Mini Capstone Project</h3>
+      <p>Describe the challenge your team tackled, your specific contribution, and the outcome or prototype you delivered.</p>
+      <div class="card-tags">
+        <span class="card-tag">Team Project</span>
+        <span class="card-tag">Design</span>
+        <span class="card-tag">Testing</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="card-cat">Capstone</p>
+      <h3>Capstone Project</h3>
+      <p>Your flagship academic project. Describe the problem statement, your engineering approach, and the final deliverable.</p>
+      <div class="card-tags">
+        <span class="card-tag">Systems Design</span>
+        <span class="card-tag">Analysis</span>
+        <span class="card-tag">Prototype</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CAD / DESIGN PROJECTS -->
+<section id="cad">
+  <p class="section-label">02 — Design &amp; CAD</p>
+  <h2 class="section-title">Design &amp; CAD Work</h2>
+
+  <div class="cards-grid">
+
+    <div class="card">
+      <p class="card-cat">SolidWorks</p>
+      <h3>SolidWorks Model or Assembly</h3>
+      <p>Describe what you modeled — a mechanism, assembly, or part family. Mention design intent and any GD&amp;T or motion studies.</p>
+      <div class="card-tags">
+        <span class="card-tag">SolidWorks</span>
+        <span class="card-tag">Assemblies</span>
+        <span class="card-tag">Drawings</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="card-cat">Ansys</p>
+      <h3>Finite Element Analysis</h3>
+      <p>Describe the structure or component analyzed, the load cases applied, and key results — stress, deformation, factor of safety.</p>
+      <div class="card-tags">
+        <span class="card-tag">Ansys FEA</span>
+        <span class="card-tag">Structural</span>
+        <span class="card-tag">Thermal</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="card-cat">Control Systems</p>
+      <h3>Control Systems Design</h3>
+      <p>Describe the system you controlled — plant modeling, controller design (PID, state-space, etc.), simulation, and performance results.</p>
+      <div class="card-tags">
+        <span class="card-tag">MATLAB</span>
+        <span class="card-tag">Simulink</span>
+        <span class="card-tag">PID</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- INTERDISCIPLINARY PROJECTS -->
+<section id="interdisciplinary">
+  <p class="section-label">03 — Interdisciplinary</p>
+  <h2 class="section-title">Personal &amp; Interdisciplinary Projects</h2>
+
+  <div class="cards-grid">
+
+    <div class="card">
+      <p class="card-cat">Mechanical + Electronics + Software</p>
+      <h3>Project One</h3>
+      <p>Describe your personal project — the problem it solves, how it blends multiple engineering domains, and what you learned building it.</p>
+      <div class="card-tags">
+        <span class="card-tag">Arduino</span>
+        <span class="card-tag">3D Print</span>
+        <span class="card-tag">Python</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="card-cat">Mechanical + Electronics + Software</p>
+      <h3>Project Two</h3>
+      <p>Another interdisciplinary project. Emphasize the integration challenge — making hardware talk to software, or mechanical constraints affecting electrical design.</p>
+      <div class="card-tags">
+        <span class="card-tag">PCB</span>
+        <span class="card-tag">CAD</span>
+        <span class="card-tag">Embedded C</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="card-cat">Mechanical + Electronics + Software</p>
+      <h3">Add More Projects</h3>
+      <p>This card is a placeholder — fill it in as you complete more projects. Your portfolio grows with you.</p>
+      <div class="card-tags">
+        <span class="card-tag">Coming Soon</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Say Hello</p>
+  <div class="contact-inner">
+    <h2 class="section-title">Let's connect.</h2>
+    <p>Whether it's a project opportunity, collaboration, or just a question — feel free to reach out.</p>
+    <a class="contact-link" href="mailto:your@email.com">your@email.com</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Your Name</span>
+  <span>Mechanical &amp; Interdisciplinary Engineer</span>
+</footer>
+
+</body>
+</html>

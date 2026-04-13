@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- ▸ CHANGE: Update the title to your project name -->
+  <title>Robot Laser Wars – Anastasia Boyaram</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafaf8;
+      --ink: #111110;
+      --mid: #6b6b63;
+      --accent: #2a5caa;
+      --border: #e4e4dc;
+      --card-bg: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 6vw;
+      background: rgba(250,250,248,0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .project-hero {
+      padding: 10rem 6vw 5rem;
+      border-bottom: 1px solid var(--border);
+      opacity: 0; animation: fadeUp 0.9s 0.2s forwards;
+    }
+    .project-category {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    .project-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      max-width: 800px;
+      margin-bottom: 1.5rem;
+    }
+    .project-summary {
+      font-size: 1.1rem;
+      color: var(--mid);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      font-size: 0.82rem;
+      color: var(--mid);
+    }
+    .project-meta span strong {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+
+    /* ── IMAGE ── */
+    .project-image-hero {
+      width: 100%;
+      aspect-ratio: 16/7;
+      object-fit: cover;
+      border-bottom: 1px solid var(--border);
+      display: block;
+    }
+    .image-placeholder {
+      width: 100%;
+      aspect-ratio: 16/7;
+      background: #f0f0ea;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    /* ── CONTENT ── */
+    .project-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 6vw;
+    }
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 6rem;
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .content-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 1.2rem;
+    }
+    .content-section p {
+      font-size: 0.95rem;
+      color: var(--mid);
+      margin-bottom: 1rem;
+      line-height: 1.75;
+    }
+    .sidebar { border-left: 1px solid var(--border); padding-left: 3rem; }
+    .sidebar-block { margin-bottom: 2.5rem; }
+    .sidebar-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+    }
+    .sidebar-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .sidebar-tag {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.75rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--mid);
+    }
+    .sidebar p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+    .full-section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .full-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+    .full-section p {
+      font-size: 0.95rem;
+      color: var(--mid);
+      line-height: 1.75;
+      max-width: 720px;
+      margin-bottom: 1rem;
+    }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .photo-grid img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+    .photo-placeholder {
+      aspect-ratio: 4/3;
+      background: #f0f0ea;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .pdf-section { padding: 4rem 0; }
+    .pdf-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+    }
+    .pdf-section p {
+      font-size: 0.95rem;
+      color: var(--mid);
+      margin-bottom: 2rem;
+      max-width: 500px;
+    }
+    .pdf-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.9rem 2rem;
+      border: 1.5px solid var(--ink);
+      border-radius: 100px;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      transition: all 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .pdf-download:hover { background: var(--ink); color: var(--bg); }
+    footer {
+      padding: 2rem 6vw;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.78rem;
+      color: var(--mid);
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 768px) {
+      .content-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .sidebar { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="../index.html">AB</a>
+  <a class="back-link" href="../index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+    Back to Portfolio
+  </a>
+</nav>
+
+<div class="project-hero">
+  <!-- ▸ CHANGE: e.g. "Academic · Robotics" or "Academic · Capstone" -->
+  <p class="project-category">Academic · Robotics</p>
+
+  <!-- ▸ CHANGE: Your project title -->
+  <h1 class="project-title">Robot Laser Wars</h1>
+
+  <!-- ▸ CHANGE: One punchy sentence about what the project is -->
+  <p class="project-summary">One sentence that captures what this project is and what it achieved.</p>
+
+  <div class="project-meta">
+    <!-- ▸ CHANGE: Fill in year, course, and team or solo -->
+    <span><strong>Year</strong>2026</span>
+    <span><strong>Course</strong>MECH 472</span>
+    <span><strong>Type</strong>Team Project</span>
+  </div>
+</div>
+
+<!-- ▸ OPTION A — Have a photo? Replace the div below with:
+     <img class="project-image-hero" src="your-image.jpg" alt="Project Name" /> -->
+<!-- ▸ OPTION B — No photo yet? Leave the placeholder as is -->
+<div class="image-placeholder">Hero image — photo, render, or technical drawing</div>
+
+<div class="project-body">
+
+  <div class="content-grid">
+    <div class="content-section">
+      <h2>Overview</h2>
+      <!-- ▸ CHANGE: What was the project about? What was the goal? -->
+      <p>Describe the project context — what course, what was the problem statement, what were you asked to design or build?</p>
+      <p>Add any additional context — team size, constraints, or timeline.</p>
+    </div>
+
+    <div class="sidebar">
+      <div class="sidebar-block">
+        <p class="sidebar-label">Tools & Software</p>
+        <div class="sidebar-tags">
+          <!-- ▸ CHANGE: Your actual tools -->
+          <span class="sidebar-tag">SolidWorks</span>
+          <span class="sidebar-tag">MATLAB</span>
+          <span class="sidebar-tag">Tool 3</span>
+        </div>
+      </div>
+      <div class="sidebar-block">
+        <p class="sidebar-label">Skills Applied</p>
+        <div class="sidebar-tags">
+          <!-- ▸ CHANGE: Relevant engineering skills -->
+          <span class="sidebar-tag">CAD Modeling</span>
+          <span class="sidebar-tag">FEA Analysis</span>
+          <span class="sidebar-tag">Skill 3</span>
+        </div>
+      </div>
+      <div class="sidebar-block">
+        <p class="sidebar-label">My Contribution</p>
+        <!-- ▸ CHANGE: What did YOU specifically do on this project? -->
+        <p>Describe your specific role and contributions — what you owned and delivered.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="full-section">
+    <h2>The Challenge</h2>
+    <!-- ▸ CHANGE: What engineering problem were you solving? -->
+    <p>Describe the challenge — what made this problem interesting or difficult? What constraints did you work within?</p>
+  </div>
+
+  <div class="full-section">
+    <h2>My Approach</h2>
+    <!-- ▸ CHANGE: How did you solve it? What decisions did you make? -->
+    <p>Walk through your approach — methods, tools, design decisions and why you made them.</p>
+    <p>Get technical here. This is where you prove you know your stuff.</p>
+
+    <!-- ▸ CHANGE: Replace placeholders with real images, or delete the grid if no photos -->
+    <div class="photo-grid">
+      <div class="photo-placeholder">Photo / Diagram 1</div>
+      <div class="photo-placeholder">Photo / Diagram 2</div>
+      <div class="photo-placeholder">Photo / Diagram 3</div>
+    </div>
+  </div>
+
+  <div class="full-section">
+    <h2>Results &amp; Takeaways</h2>
+    <!-- ▸ CHANGE: What was the outcome? What did you learn? -->
+    <p>Describe the final result — what did you deliver, how was it received, any measurable outcomes?</p>
+    <p>What did you take away from this project? Shows growth mindset.</p>
+  </div>
+
+  <div class="pdf-section">
+    <h2>Documentation</h2>
+    <p>Download the full technical report for detailed methodology, calculations, and findings.</p>
+    <!-- ▸ CHANGE: Update href to your PDF filename -->
+    <!-- ▸ DELETE this block entirely if you don't have a PDF for this project -->
+    <a class="pdf-download" href="your-report.pdf" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+      Download Full Report (PDF)
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <span>© 2026 Anastasia Boyaram</span>
+  <a href="../index.html" class="back-link">← Back to Portfolio</a>
+</footer>
+
+</body>
+</html>
