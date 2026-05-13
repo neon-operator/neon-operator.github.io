@@ -8,13 +8,28 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --bg: #fafaf8;
-      --ink: #111110;
-      --mid: #6b6b63;
-      --accent: #2a5caa;
-      --border: #e4e4dc;
-      --card-bg: #ffffff;
+    :root { 
+      /* Backgrounds */ 
+      --bg: #1A1815; 
+      /* page background — warm walnut */ 
+      --card-bg: #221F1B; 
+      /* cards, slightly lighter than bg */ 
+      --nav-bg: rgba(26, 24, 21, 0.88); 
+      /* nav with transparency */ /* Text */ 
+      --ink: #F5F1E8; 
+      /* primary text — warm bone */ 
+      --mid: #A89E8C; 
+      /* secondary text — warm gray */ 
+      --soft: #6B6356; 
+      /* tertiary text — muted */ /* Accent + borders */ 
+      --accent: #E07856; 
+      /* terracotta accent */ 
+      --accent-soft: #E0785622; 
+      /* terracotta at low opacity for hovers */ 
+      --border: #3A352E; 
+      /* subtle warm borders */ 
+      --border-strong: #4A453D; 
+      /* slightly stronger when needed */ 
     }
 
     html { scroll-behavior: smooth; }
@@ -33,7 +48,7 @@
       z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.4rem 6vw;
-      background: rgba(250,250,248,0.88);
+      background: var(--nav-bg);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
