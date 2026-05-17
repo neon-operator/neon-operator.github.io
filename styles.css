@@ -110,6 +110,15 @@ h2.section-title {
   margin-bottom: 3.5rem;
 }
 
+.section-intro {
+  font-size: 0.95rem;
+  color: var(--mid);
+  max-width: 600px;
+  margin-top: -2.5rem;
+  margin-bottom: 3.5rem;
+  line-height: 1.6;
+}
+
 
 /* ── HERO (index page) ── */
 #hero {
@@ -200,7 +209,6 @@ h1.hero-name {
   transition: border-color 0.2s, background 0.2s;
 }
 .skill-tag:hover { border-color: var(--accent); background: var(--accent-soft); }
-
 
 /* ── PROJECT CARDS (index page) ── */
 .cards-grid {
